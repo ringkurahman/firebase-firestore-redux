@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Header from './components/Shared/Header'
 
 import Home from './components/Home'
+import Login from "./components/User/Login"
+
 
 class Routes extends Component {
   render() {
@@ -11,6 +13,7 @@ class Routes extends Component {
       <BrowserRouter>
         <Header />
         <Switch>
+          <Route path="/login" component={Login} />
           <Route path="/home" component={Home} />
         </Switch>
       </BrowserRouter>
