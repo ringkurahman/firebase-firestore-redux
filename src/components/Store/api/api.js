@@ -41,3 +41,41 @@ export const loginUser = async ({ email, password }) => {
     return { error: err.message }
   }
 }
+
+
+// AutoSign In User
+export const autoSignIn = () => (
+    new Promise((resolve, reject) => {
+        firebase.auth().onAuthStateChanged(async (user) => {
+          if (user) {
+              const userProfile = await getUserProfile(user.uid)
+              resolve({ isAuth: true, user: userProfile })
+
+          } else {
+            resolve({ isAuth: false, user: null })
+          }
+        })
+    })
+)
+
+
+// // AutoSign In User
+// export const autoSignIn = () => (
+//     new Promise((resolve, reject) => {
+//         firebase.auth().onAuthStateChanged(user => {
+//             if (user) {
+//                 usersCollection.doc(user.uid).get()
+//                     .then(snapshot => {
+//                        resolve({ isAuth: true, user: snapshot.data() }) 
+//                 })
+//             } else {
+//                 resolve({ isAuth: false, user: null })
+//             }
+//         })
+//     })
+// )
+
+
+export const logoutUser = () => (
+    firebase.auth().signOut()
+)

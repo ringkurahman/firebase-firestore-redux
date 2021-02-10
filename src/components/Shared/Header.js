@@ -1,10 +1,25 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
+import { useDispatch } from 'react-redux'
+import { logoutUser } from '../Store/actions/authActions'
 
 
-const Header = () => {
+
+const Header = (props) => {
+
+  const dispatch = useDispatch()
+  const { isAuth } = props.auth
+  const history = useHistory()
+
+  const handleLogout = () => {
+    dispatch(logoutUser()).then(() => {
+      history.push('/')
+    })
+  }
+
     return (
       <header>
         <Navbar bg="dark" variant="dark" expand="lg">
@@ -19,11 +34,15 @@ const Header = () => {
                 <LinkContainer to="/home">
                   <Nav.Link>Home</Nav.Link>
                 </LinkContainer>
-
-                <LinkContainer to="/login">
-                  <Nav.Link>Login</Nav.Link>
-                </LinkContainer>
-                
+                {isAuth ? (
+                  <LinkContainer onClick={ handleLogout }>
+                    <Nav.Link>Logout</Nav.Link>
+                  </LinkContainer>
+                ) : (
+                  <LinkContainer to="/login">
+                    <Nav.Link>Login</Nav.Link>
+                  </LinkContainer>
+                )}
               </Nav>
             </Navbar.Collapse>
           </Container>
