@@ -21,3 +21,4 @@ export default db
 
 // Create firestore collection
 export const usersCollection = db.collection('users')
+export const postsCollection = db.collection("posts")

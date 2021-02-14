@@ -15,7 +15,8 @@ const Header = (props) => {
   const history = useHistory()
 
   const handleLogout = () => {
-    dispatch(logoutUser()).then(() => {
+    dispatch(logoutUser())
+      .then(() => {
       history.push('/')
     })
   }
@@ -31,13 +32,11 @@ const Header = (props) => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
-                <LinkContainer to="/home">
-                  <Nav.Link>Home</Nav.Link>
+                <LinkContainer to="/add-post">
+                  <Nav.Link>Add Post</Nav.Link>
                 </LinkContainer>
                 {isAuth ? (
-                  <LinkContainer onClick={ handleLogout }>
-                    <Nav.Link>Logout</Nav.Link>
-                  </LinkContainer>
+                    <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
                 ) : (
                   <LinkContainer to="/login">
                     <Nav.Link>Login</Nav.Link>

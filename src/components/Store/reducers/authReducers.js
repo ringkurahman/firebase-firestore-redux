@@ -1,4 +1,9 @@
-import { REGISTER_USER, LOGIN_USER, LOGOUT_USER } from "../constants/index"
+import {
+  REGISTER_USER,
+  LOGIN_USER,
+  LOGOUT_USER,
+  ADD_MESSAGE,
+} from "../constants/index"
 
 
 const INITIAL_STATE = {
@@ -11,6 +16,8 @@ function authReducers(state = INITIAL_STATE, action) {
     case REGISTER_USER:
     case LOGIN_USER:
       return { ...state, ...action.payload }
+    case ADD_MESSAGE:
+      return { ...state, lastMsgAdded: action.payload }
     case LOGOUT_USER:
       return { ...state, user: null, isAuth: false }
 

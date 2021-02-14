@@ -38,16 +38,16 @@ class Login extends Component {
         this.props.dispatch(registerUser(values))
       } else {
         // Login
-          this.props.dispatch(loginUser(values))
-          this.notify()
+        this.props.dispatch(loginUser(values))
+        this.notify()
       }
-        this.props.history.push("/dashboard")
+      this.props.history.push("/dashboard")
     },
   }
 
-    // Pop up message
-    notify = () => toast.success('Welcome', { position: 'toast.POSITION.TOP_RIGHT' })
-    
+  // Pop up message
+  notify = () =>
+    toast.success("Welcome", { position: "toast.POSITION.TOP_RIGHT" })
 
   // Switch submit button
   switchTypeHandler = () => {

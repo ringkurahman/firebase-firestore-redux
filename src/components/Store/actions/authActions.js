@@ -1,5 +1,5 @@
 import * as api from "../api/api"
-import { REGISTER_USER, LOGIN_USER, LOGOUT_USER } from "../constants/index"
+import { REGISTER_USER, LOGIN_USER, LOGOUT_USER, ADD_MESSAGE } from "../constants/index"
 
 
 export const registerUser = (userData) => ({
@@ -19,7 +19,14 @@ export const autoSignIn = () => ({
   payload: api.autoSignIn()
 })
 
+
 export const logoutUser = () => ({
   type: LOGOUT_USER,
   payload: api.logoutUser(),
+})
+
+
+export const addMessage = (data, user) => ({
+  type: ADD_MESSAGE,
+  payload: api.addMessage(data, user),
 })

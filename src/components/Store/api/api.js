@@ -1,7 +1,8 @@
 import firebase from "firebase/app"
 import "firebase/auth"
-import { usersCollection } from '../../db/index'
+import { usersCollection, postsCollection } from '../../db/index'
 
+const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp
 
 
 // Create user profile on firestore
@@ -59,7 +60,7 @@ export const autoSignIn = () => (
 )
 
 
-// // AutoSign In User
+// AutoSign In User
 // export const autoSignIn = () => (
 //     new Promise((resolve, reject) => {
 //         firebase.auth().onAuthStateChanged(user => {
@@ -79,3 +80,16 @@ export const autoSignIn = () => (
 export const logoutUser = () => (
     firebase.auth().signOut()
 )
+
+
+// Add Message
+export const addMessage = (data, user) =>
+    postsCollection.add({
+        ...data,
+        createdAt: serverTimestamp(),
+        author: { ownerId: user.uid, ownerName: user.username, email: user.email }
+    }).then(docRef => {
+        return docRef.id
+    }).catch(err => {
+        return err
+    })
