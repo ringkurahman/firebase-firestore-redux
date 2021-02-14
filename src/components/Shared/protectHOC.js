@@ -1,33 +1,26 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
+import { Redirect, Route } from "react-router-dom"
 import { useSelector } from "react-redux"
-import Loader from "./Loader"
 
 
 
-export default function (ComposedComponent) {
+const PrivateRoute = ({ children, ...rest }) => {
 
-    const AuthenticationCheck = (props) => {
-      
-        const [isAuth, setIsAuth] = useState(false)
-        const user = useSelector(({ auth }) => auth.user)
+    const user = useSelector(({ auth }) => auth.user)
+    console.log(user)
 
-        useEffect(() => {
-        if (!user) {
-            // user not auth
-            props.history.push("/")
-        } else {
-            setIsAuth(true)
-            props.history.push("/dashboard")
-        }
-        }, [props, user])
-
-        if (!isAuth) {
-        return (
-            <Loader />
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        user ? (
+          children
+        ) : (
+          <Redirect to={{ pathname: "/", state: { from: location } }} />
         )
-        } else {
-        return <ComposedComponent {...props} />
-        }
-  }
-  return AuthenticationCheck
+      }
+    />
+  )
 }
+
+export default PrivateRoute

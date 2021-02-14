@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 // Shared Components
 import Header from './components/Shared/Header'
-import Protect from "./components/Shared/protectHOC"
+import PrivateRoute from "./components/Shared/protectHOC"
 import Loader from "./components/Shared/Loader"
 
 // Components
@@ -32,8 +32,12 @@ class Routes extends Component {
     <BrowserRouter>
       <Header auth={auth} />
       <Switch>
-        <Route path="/add-post" component={AddPost} />
-        <Route path="/dashboard" component={Dashboard} />
+        <PrivateRoute path="/add-post">
+          <AddPost />
+        </PrivateRoute>
+        <PrivateRoute path="/dashboard">
+          <Dashboard />
+        </PrivateRoute>
         <Route path="/login" component={Login} />
         <Route path="/" component={Home} />
       </Switch>
