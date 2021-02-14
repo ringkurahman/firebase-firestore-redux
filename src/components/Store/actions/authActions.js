@@ -1,5 +1,11 @@
 import * as api from "../api/api"
-import { REGISTER_USER, LOGIN_USER, LOGOUT_USER, ADD_MESSAGE } from "../constants/index"
+import {
+  REGISTER_USER,
+  LOGIN_USER,
+  LOGOUT_USER,
+  ADD_MESSAGE,
+  FETCH_POSTS,
+} from "../constants/index"
 
 
 export const registerUser = (userData) => ({
@@ -29,4 +35,10 @@ export const logoutUser = () => ({
 export const addMessage = (data, user) => ({
   type: ADD_MESSAGE,
   payload: api.addMessage(data, user),
+})
+
+
+export const fetchPosts = () => ({
+  type: FETCH_POSTS,
+  payload: api.fetchPosts(),
 })

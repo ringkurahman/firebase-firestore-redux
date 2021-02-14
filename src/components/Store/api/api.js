@@ -93,3 +93,19 @@ export const addMessage = (data, user) =>
     }).catch(err => {
         return err
     })
+
+
+// Fetch Posts
+export const fetchPosts = async () => {
+  try {
+    const snapshot = await postsCollection.get()
+    const posts = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }))
+
+    return { homePosts: posts }
+  } catch (error) {
+    return { error: error.message }
+  }
+}

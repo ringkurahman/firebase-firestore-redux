@@ -3,6 +3,7 @@ import {
   LOGIN_USER,
   LOGOUT_USER,
   ADD_MESSAGE,
+  FETCH_POSTS,
 } from "../constants/index"
 
 
@@ -18,6 +19,8 @@ function authReducers(state = INITIAL_STATE, action) {
       return { ...state, ...action.payload }
     case ADD_MESSAGE:
       return { ...state, lastMsgAdded: action.payload }
+    case FETCH_POSTS:
+      return { ...state, ...action.payload }
     case LOGOUT_USER:
       return { ...state, user: null, isAuth: false }
 
